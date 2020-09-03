@@ -1,0 +1,33 @@
+#forms{
+    top: 15px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 0px rgb(0, 0, 0);
+
+}
+#top_formulario{
+    padding-top: 75px;
+}
+
+.form-group{
+    text-align: left;
+}
+#check{
+    text-align: center;
+}
+#ano{
+    text-align: center;
+}
+#foto{
+    border-radius: 2px;
+    box-shadow: 0px 0px 2px 0px rgb(0, 0, 0);
+}
+#lista_usuarios{
+    padding-top: 85px;
+    border-radius: 2px;
+    box-shadow: 0px 0px 5px 0px rgb(0, 0, 0);
+}
+#tabela_usuario{
+    padding-top: 5px;
+}
