@@ -83,7 +83,6 @@ class RegisterController extends Controller
             'password' => 'required|min:8|same:password_confirmation',
             'password_confirmation' => 'required'
         ]);
-
         $usuario = new User([
             'name' => $request['name'],
             'email' => $request['email'],
@@ -100,12 +99,9 @@ class RegisterController extends Controller
             'uf' => $request['uf'],
             'password' => Hash::make($request['password']),
         ]);
-
         $usuario->save();
-
         return redirect('login');
     }
-    
     public function index() {
         return view('auth.register');
     }

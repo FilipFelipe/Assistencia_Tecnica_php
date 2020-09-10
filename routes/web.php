@@ -1,14 +1,18 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
-//Route::get('/login', 'Auth\LoginController@login')->name('login');
+
+Route::get('/login', 'Auth\LoginController@carregalogin')->name('page.login');
+Route::get('/', 'Auth\LoginController@carregalogin');
+Route::post('/login', 'Auth\LoginController@login')->name('user.login');
 Route::get('/registrar', 'Auth\RegisterController@index')->name('registrar');
 Route::post('/registrar', 'Auth\RegisterController@registrar')->name('registrar_usuario');
+
+
+Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
-//Auth::routes();
-
-
 
 Route::prefix('funcionario')->group(function () {
     Route::get('/', 'FuncionarioController@index')->name('listar_funcionario');
@@ -34,10 +38,8 @@ Route::prefix('ordem_servico')->group(function () {
     Route::get('/', 'OrdemServicoController@index')->name('listar_ordem');
     Route::get('/novo', 'OrdemServicoController@nova_ordem')->name('nova_ordem');
     Route::get('/{id}', 'OrdemServicoController@consultar_ordem')->name('consultar_ordem');
-    
     Route::get('/alterar/{id}', 'OrdemServicoController@alterar')->name('alterar_ordem');
     Route::get('/excluir/{id}', 'OrdemServicoController@excluir_ordem')->name('excluir_ordem');
-
     Route::post('/excluir/{id}', 'OrdemServicoController@excluir')->name('excluir');
     Route::post('/alterar/{id}', 'OrdemServicoController@alterar_ordem')->name('alterar');
     Route::post('/salvar', 'OrdemServicoController@salvar_ordem')->name('salvar_ordem');
