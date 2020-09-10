@@ -11,8 +11,8 @@ class Usuario extends Model
     protected $fillable = [
         'name', 'email', 'password', 'cpf', 'sexo','aniversario','telefone','cep','rua','numero','complemento','bairro','cidade','uf',
     ];
-    public function funcionario(){
-
-        return $this->hasMany('App\Funcionario','funcionario_id');
+    
+    public function ordem() {
+        return $this->hasMany('App\OrdemServico', 'usuario_id');
     }
 }

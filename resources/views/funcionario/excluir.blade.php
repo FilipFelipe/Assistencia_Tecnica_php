@@ -8,7 +8,7 @@ Excluir
 </div>
 @endsection
 @section('content')
-<form method="post" action="/excluir_funcionario/{{$funcionario->id}}">
+<form method="post" action="/funcionario/excluir/{{$funcionario->id}}">
     @csrf
     @include('funcionario.__form')
     <input type="hidden" value="{{ $funcionario->id }}">

@@ -8,7 +8,7 @@ Alterar
 </div>
 @endsection
 @section('content')
-<form method="post" action="/alterar_funcionario/{{$funcionario->id}}">
+<form method="post" action="/funcionario/alterar/{{$funcionario->id}}">
     @csrf
     @include('funcionario.__form')
     <input type="hidden" value="{{ $funcionario->id }}">

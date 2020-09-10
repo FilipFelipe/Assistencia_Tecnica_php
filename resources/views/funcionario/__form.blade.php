@@ -1,7 +1,7 @@
 <div class="form-group container">
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label for="l_Email">Nome</label>
+            <label for="l_Email">Nome do funcionário</label>
             <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" @if($readonly ?? '' ) readonly @endif value="{{ $funcionario->name ?? '' }}" required autocomplete="name" autofocus />
 
             @error('name')

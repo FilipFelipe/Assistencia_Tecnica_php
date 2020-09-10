@@ -14,7 +14,7 @@ class Fornecedor extends Migration
     public function up()
     {
         Schema::create('fornecedor', function (Blueprint $table) {
-            $table->increments('fornecedor_id');
+            $table->increments('id');
             $table->string('nome_fantasia');
             $table->string('razao_social');
             $table->string('cnpj');

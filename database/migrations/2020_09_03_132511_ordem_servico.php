@@ -14,11 +14,11 @@ class OrdemServico extends Migration
     public function up()
     {   
         Schema::create('ordem_servico', function (Blueprint $table) {
-            $table->increments('ordem_servico_id');
+            $table->increments('id');
             $table->integer('usuario_id')-> unsigned();
-            $table->foreign('usuario_id')->references('usuario_id')->on('usuario');
+            $table->foreign('usuario_id')->references('id')->on('usuario');
             $table->integer('funcionario_id')-> unsigned();
-            $table->foreign('funcionario_id')->references('funcionario_id')->on('funcionario');
+            $table->foreign('funcionario_id')->references('id')->on('funcionario');
             $table->string('obs');
             $table->string('data');
             $table->string('status');

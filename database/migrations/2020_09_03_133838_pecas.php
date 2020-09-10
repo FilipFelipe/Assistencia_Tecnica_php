@@ -14,7 +14,7 @@ class Pecas extends Migration
     public function up()
     {
         Schema::create('pecas', function (Blueprint $table) {
-            $table->increments('pecas_id');
+            $table->increments('id');
             $table->string('nome');
             $table->string('valor');
             $table->string('tipo');

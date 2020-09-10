@@ -51,7 +51,7 @@ class usuarioController extends Controller
     }
     public function alterar(Request $request, $id) {
         $usuario = usuario::find($id);
-        $usuario->nome = $request['name'];
+        $usuario->name = $request['name'];
         $usuario->telefone = $request['telefone'];
         $usuario->cpf = $request['cpf'];
         $usuario->sexo = $request['sexo'];
@@ -73,5 +73,6 @@ class usuarioController extends Controller
 
         return redirect('/usuario');
     }
-
+   
+    
 }

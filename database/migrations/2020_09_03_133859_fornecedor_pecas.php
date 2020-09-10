@@ -14,11 +14,11 @@ class FornecedorPecas extends Migration
     public function up()
     {
         Schema::create('fornecedor_pecas', function (Blueprint $table) {
-            $table->increments('fornecedor_pecas_id');
+            $table->increments('id');
             $table->integer('fornecedor_id')-> unsigned();
-            $table->foreign('fornecedor_id')->references('fornecedor_id')->on('fornecedor');
+            $table->foreign('fornecedor_id')->references('id')->on('fornecedor');
             $table->integer('pecas_id')-> unsigned();
-            $table->foreign('pecas_id')->references('pecas_id')->on('pecas');
+            $table->foreign('pecas_id')->references('id')->on('pecas');
             $table->string('obs');
             $table->string('data');
             $table->string('status');

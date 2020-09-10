@@ -8,7 +8,7 @@ Excluir
 </div>
 @endsection
 @section('content')
-<form method="post" action="/excluir_usuario/{{$usuario->id}}">
+<form method="post" action="/excluir/{{$usuario->id}}">
     @csrf
     @include('usuario.__form')
     <input type="hidden" value="{{ $usuario->id }}">

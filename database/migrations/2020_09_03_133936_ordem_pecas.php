@@ -14,11 +14,11 @@ class OrdemPecas extends Migration
     public function up()
     {
         Schema::create('ordem_pecas', function (Blueprint $table) {
-            $table->increments('ordem_pecas_id');
+            $table->increments('id');
             $table->integer('pecas_id')-> unsigned();
-            $table->foreign('pecas_id')->references('pecas_id')->on('pecas');
+            $table->foreign('pecas_id')->references('id')->on('pecas');
             $table->integer('ordem_servico_id')-> unsigned();
-            $table->foreign('ordem_servico_id')->references('ordem_servico_id')->on('ordem_servico');
+            $table->foreign('ordem_servico_id')->references('id')->on('ordem_servico');
             $table->string('obs');
             $table->string('data');
             $table->string('quantidade');
