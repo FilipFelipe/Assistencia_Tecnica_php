@@ -15,6 +15,7 @@
                     @endif
 
                     {{ __('VOCE TA LOGADO') }}
+                   
                 </div>
             </div>
         </div>

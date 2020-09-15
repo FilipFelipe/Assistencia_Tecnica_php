@@ -18,6 +18,7 @@ class OrdemServicoController extends Controller
 
     public function index() {
         $Ordens = OrdemServico::paginate(5);
+        //dd($Ordens);
         return view('ordem_servico.index', ['OrdemServicos' => $Ordens]);
     }
 

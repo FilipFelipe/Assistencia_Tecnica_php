@@ -1,111 +1,121 @@
-<!DOCTYPE html>
-<html lang="pt" xmlns="http://www.w3.org/1999/xhtml">
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Main CSS-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('lib/css/main.css') }}">
-    <link href="{{ asset('lib/css/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
-    <title>Login</title>
+  <!-- Scripts -->
+  <script src="{{ asset('js/app.js') }}" defer></script>
+
+  <!-- Fonts -->
+  <link rel="dns-prefetch" href="//fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+  <link href="{{ asset('lib/css/main.css') }}" rel="stylesheet">
+  <link href="{{ asset('lib/css/style.css') }}" rel="stylesheet">
+  <link href="{{ asset('lib/css/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{{ asset('lib/css/font-awesome/css/font-awesome.css') }}">
+  <title>Cadastro de Usuário - FF</title>
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark pink scrolling-navbar navbar-dark bg-dark">
+    <a class="navbar-brand" href="#"><strong>Navbar</strong></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/login">login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/register">Cadastrar</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav nav-flex-icons">
+        <li class="nav-item">
+
+        </li>
+        <li class="nav-item">
+
+        </li>
+        <li class="nav-item">
+
+        </li>
+      </ul>
+    </div>
+  </nav>
+
 </head>
 
 <body>
-    <section class="material-half-bg">
-        <div class="cover"></div>
-    </section>
-    <section class="login-content">
-        @if (Session::has('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <i class="fa fa-check-circle"></i>
-                <span>
-                    <strong>{{ Session::get('success') }}</strong>
-                </span>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            </div>
-        @endif
-        @if (Session::has('fail'))
-          <div class="alert alert-danger alert-dismissible fade show" role="alert">
-              <i class="fa fa-check-circle"></i>
-              <span>
-                  <strong>{{ Session::get('fail') }}</strong>
-              </span>
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-              </button>
+  <section class="container-fluid">
+    <center>
+
+      <section id="top_formulario" class="col-12 col-sm-9 col-md-4">
+        <form method="POST" action="{{ route('user.login') }}">
+          @csrf
+          <img id="foto" class="mb-4" src="https://img.icons8.com/dotty/80/000000/name.png" alt="" width="72" height="72">
+          <h1 class="h3 mb-3 font-weight-normal">Faça login</h1>
+          @if (Session::has('success'))
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fa fa-check-circle"></i>
+            <span>
+              <strong>{{ Session::get('success') }}</strong>
+            </span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
-        @endif
-        <div class="logo">
-            <h1>Projeto</h1>
-        </div>
-        <div class="login-box">
+          </div>
+          @endif
+          @if (Session::has('fail'))
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fa fa-check-circle"></i>
+            <span>
+              <strong>{{ Session::get('fail') }}</strong>
+            </span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          @endif
+          <div class="form-group">
+            <label for="l_email">E-mail</label>
+            <input id="email" type="email" name="email" value="{{ old('email') }}" class="form-control" required autocomplete="email" autofocus>
+            @error('email')
+            <div class="invalid-feedback">
+              <span><strong>{{ $message }}</strong></span>
+            </div>
+            @enderror
+          </div>
+          <div class="form-group">
+            <label for="l_senha">Senha</label>
+            <input id="password" type="password" class="form-control" name="password" required autocomplete="current-password">
+            @error('password')
+            <div class="invalid-feedback">
+              <span><strong>{{ $message }}</strong></span>
+            </div>
+            @enderror
+          </div>
+          <div id="check" class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="input_Check">
+            <label class="form-check-label" for="l_check">Lembrar de mim </label>
+          </div>
 
-            <form class="login-form" method="POST" action="{{ url('/login') }}">
-
-                @csrf
-                <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>Acessar Sistema!!!!!!</h3>
-                <div class="form-group">
-                    <label for="email" class="control-label">E-mail</label>
-                    <input class="form-control @error('email') is-invalid @enderror" type="text" id="email" name="email"
-                        placeholder="Email" autofocus>
-                    @error('email')
-                    <div class="invalid-feedback">
-                        <span><strong>{{ $message }}</strong></span>
-                    </div>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="password" class="control-label">Senha</label>
-                    <input class="form-control  @error('password') is-invalid @enderror" type="password" id="password"
-                        name="password" placeholder="Password">
-                    @error('password')
-                    <div class="invalid-feedback">
-                        <span><strong>{{ $message }}</strong></span>
-                    </div>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <div class="utility">
-                    <p class="semibold-text mb-2"><a href="{{ url('/usuario/mailpage')}}">Recuperar Senha?</a></p>
-                        <p class="semibold-text mb-2"><a href="{{ url('/usuario/novo') }}">Registrar-se ?</a></p>
-                    </div>
-                </div>
-                <div class="form-group btn-container">
-                    <button class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>Acessar</button>
-                </div>
-                <div class="form-group">
-                    <div class="utility">
-                        <div class="animated-checkbox">
-                            <label>
-                                <input type="checkbox" id="checkRememberMe" name="checkRememberMe"><span
-                                    class="label-text">Mantenha-se conectado</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </section>
-    <!-- Essential javascripts for application to work-->
-
-    <script src="{{ asset('lib/js/jquery-3.2.1.min.js') }}"></script>
-    <script src="{{ asset('lib/js/popper.min.js') }}"></script>
-    <script src="{{ asset('lib/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('lib/js/main.js') }}"></script>
-    <!-- The javascript plugin to display page loading on top-->
-    <script src="{{ asset('lib/js/plugins/pace.min.js') }}"></script>
-    <script type="text/javascript">
-        // Login Page Flipbox control
-        $('.login-content [data-toggle="flip"]').click(function() {
-            $('.login-box').toggleClass('flipped');
-            return false;
-        });
-
-    </script>
+          <button type="submit" class="btn btn-primary btn-lg btn-block"> Entrar</button>
+          <p class="message"> <a href="#">Esqueceu sua senha?</a></p>
+          <p class="message">Não tem conta?<a href="cadastro"> Crie agora</a></p>
+          </div>
+          </div>
+        </form>
+      </section>
+    </center>
+  </section>
+  <p id="ano" class="mt-5 mb-3 text-muted">© 2017-2020</p>
 </body>
+<script src="{{ asset('lib/js/jquery-3.2.1.min.js') }}"></script>
+<script src="{{ asset('lib/js/popper.min.js') }}"></script>
+<script src="{{ asset('lib/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('lib/js/main.js') }}"></script>
+<script src="{{ asset('lib/js/plugins/pace.min.js') }}"></script>
 
 </html>

@@ -49,7 +49,7 @@
     <section class="container-fluid">
         <center>
             <section id="top_formulario" class="col-12 col-sm-9 col-md-5">
-                <form id="forms" name="usuario" class="cadastro" method="POST" action="{{ route('registrar_usuario') }}">
+                <form id="forms" name="usuario" class="cadastro" method="POST" action="{{ route('cadastro_usuario') }}">
                 @csrf
                     <img id="foto" class="mb-4" src="https://img.icons8.com/office/80/000000/parse-from-clipboard.png" alt="" width="72" height="72">
                     <h1 class="h3 mb-3 font-weight-normal">Cadastro de usuário</h1>

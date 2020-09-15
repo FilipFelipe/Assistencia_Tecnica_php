@@ -13,6 +13,6 @@ class Usuario extends Model
     ];
     
     public function ordem() {
-        return $this->hasMany('App\OrdemServico', 'usuario_id');
+        return $this->hasMany('App\OrdemServico','usuario_id' ,'id');
     }
 }

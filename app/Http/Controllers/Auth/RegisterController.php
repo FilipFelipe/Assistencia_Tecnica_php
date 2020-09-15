@@ -100,7 +100,7 @@ class RegisterController extends Controller
             'password' => Hash::make($request['password']),
         ]);
         $usuario->save();
-        return redirect('login');
+        return redirect()->route('page.login');
     }
     public function index() {
         return view('auth.register');

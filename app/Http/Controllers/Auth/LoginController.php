@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
 use App\User;
 use App\Http\Controllers\Controller;
@@ -21,32 +20,36 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
         $this->repository = $user;
     }
-
     public function login(LoginRequest $request)
     {
         $email = $request->email;
         $password = $request->password;
-        $user = $this->repository->where('email',$email)->first();
-        if($user){
-            if(Auth::check()|| ($user && hash::check($password,$user->password))){
+        $user = $this->repository->where('email', $email)->first();
+        if ($user) {
+            if (Auth::check() || ($user && hash::check($password, $user->password))) {
                 Auth::login($user);
-                if($user->is_active == 1){
-                    return redirect()->route('home');
+                if ($user->is_active == 1) {
+                    //return redirect()->route('dashboard');
+                    return view('dashboard');
+                } else {
+                    return redirect()->route('page.login')->with('fail', 'Verifique o email!');
                 }
-                else{
-                    return redirect()->route('page.login')->with('fail','Verifique o email!');
-                }
-            }else{
-                return redirect()->route('page.login')->with('fail','Senha Inválida!');
+            } else {
+                return redirect()->route('page.login')->with('fail', 'Seu e-mail ou senha informados são inválidos');
             }
+        } else {
+            return redirect()->route('page.login')->with('fail', 'Seu e-mail ou senha informados são inválidos');
         }
-        else{
-            return redirect()->route('page.login')->with('fail','usuario nao encontrado!');
-        }
-        return redirect()->route('page.login')->with('fail','Falha no login, tente novamente!');
+        return redirect()->route('page.login')->with('fail', 'Falha no Login - Tente novamente');
     }
     public function carregalogin()
     {
         return view('auth.login');
     }
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/login');
+    }
+   
 }

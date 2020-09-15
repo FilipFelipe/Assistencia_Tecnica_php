@@ -12,6 +12,6 @@ class Funcionario extends Model
         'name', 'email', 'password', 'cpf', 'sexo','aniversario','telefone','cep','rua','numero','complemento','bairro','cidade','uf',
     ];
     public function ordem() {
-        return $this->hasMany('App\OrdemServico', 'funcionario_id');
+        return $this->hasMany('App\OrdemServico','id' ,'funcionario_id');
     }
 }
