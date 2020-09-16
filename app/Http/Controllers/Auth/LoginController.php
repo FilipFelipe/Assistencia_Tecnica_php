@@ -27,12 +27,11 @@ class LoginController extends Controller
         $user = $this->repository->where('email', $email)->first();
         if ($user) {
             if (Auth::check() || ($user && hash::check($password, $user->password))) {
-                Auth::login($user);
-                if ($user->is_active == 1) {
-                    //return redirect()->route('dashboard');
+                if ($user->is_active == true) {
+                    Auth::login($user);
                     return view('dashboard');
                 } else {
-                    return redirect()->route('page.login')->with('fail', 'Verifique o email!');
+                    return redirect()->route('page.login')->with('fail', 'Verifique o email para ativar a sua conta!');
                 }
             } else {
                 return redirect()->route('page.login')->with('fail', 'Seu e-mail ou senha informados são inválidos');

@@ -13,7 +13,7 @@ class OrdemServico extends Model
         'usuario_id', 'funcionario_id', 'obs', 'data', 'status','ordem_servico',
     ];
     public function usuario() {
-        return $this->belongsTo('App\Usuario','usuario_id','id');
+        return $this->belongsTo('App\User','usuario_id','id');
     }
 
     public function funcionario() {

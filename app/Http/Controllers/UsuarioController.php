@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\usuario;
+use App\User;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Hash;
 class usuarioController extends Controller
 {
     public function novo_usuario() {
@@ -12,45 +12,49 @@ class usuarioController extends Controller
     }
     public function index()
     {
-        $usuarios = usuario::paginate(5);
+        $usuarios = user::paginate(5);
         return view('usuario.index', ['usuario' => $usuarios]);
     }
     public function salvar_usuario(Request $request) {
-        $usuario = new usuario([
+        $this->validate($request, [
+            'name' => 'required|max:255',
+            'email' => 'required|unique:users',
+            'password' => 'required|min:8|same:password_confirmation',
+            'password_confirmation' => 'required'
+        ]);
+        $usuario = new User([
             'name' => $request['name'],
-            'telefone' => $request['telefone'],
+            'email' => $request['email'],
             'cpf' => $request['cpf'],
-            'password' => $request['password'],
             'sexo' => $request['sexo'],
             'aniversario' => $request['aniversario'],
+            'telefone' => $request['telefone'],
+            'cep' => $request['cep'],
             'rua' => $request['rua'],
-            'email' => $request['email'],
             'numero' => $request['numero'],
             'complemento' => $request['complemento'],
             'bairro' => $request['bairro'],
             'cidade' => $request['cidade'],
             'uf' => $request['uf'],
-            'cep' => $request['cep'],
+            'password' => Hash::make($request['password']),
         ]);
-
         $usuario->save();
-
         return redirect('/usuario');
     }
     public function visualizar_usuario($id) {
-        $usuario = usuario::find($id);
+        $usuario = user::find($id);
         return view('usuario.consultar', ['usuario' => $usuario, 'readonly' => true]);
     }
     public function excluir_usuario($id) {
-        $usuario = usuario::find($id);
+        $usuario = user::find($id);
         return view('usuario.excluir', ['usuario' => $usuario, 'readonly' => true]);
     }
     public function alterar_usuario($id) {
-        $usuario = usuario::find($id);
+        $usuario = user::find($id);
         return view('usuario.alterar', ['usuario' => $usuario]);
     }
     public function alterar(Request $request, $id) {
-        $usuario = usuario::find($id);
+        $usuario = user::find($id);
         $usuario->name = $request['name'];
         $usuario->telefone = $request['telefone'];
         $usuario->cpf = $request['cpf'];
@@ -67,7 +71,7 @@ class usuarioController extends Controller
         return redirect('/usuario');
     }
     public function excluir(Request $request, $id) {
-        $usuario = usuario::find($id);
+        $usuario = user::find($id);
         
         $usuario->delete();
 

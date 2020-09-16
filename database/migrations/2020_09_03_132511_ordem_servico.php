@@ -16,7 +16,7 @@ class OrdemServico extends Migration
         Schema::create('ordem_servico', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('usuario_id')-> unsigned();
-            $table->foreign('usuario_id')->references('id')->on('usuario');
+            $table->foreign('usuario_id')->references('id')->on('users');
             $table->integer('funcionario_id')-> unsigned();
             $table->foreign('funcionario_id')->references('id')->on('funcionario');
             $table->string('obs');

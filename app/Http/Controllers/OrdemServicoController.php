@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Funcionario;
 use App\Usuario;
 use App\OrdemServico;
+use App\User;
 use Illuminate\Http\Request;
 use OrdemPecas;
 
@@ -29,14 +30,14 @@ class OrdemServicoController extends Controller
     }
 
     public function ordem_usuario($id) {
-        $usuarios = Usuario::find($id)->usuarios;
+        $usuarios = User::find($id)->usuarios;
 
         return view('ordem_servico.usuarios', ['usuarios' => $usuarios]);
     }
 
     public function nova_ordem() {
         $funcionarios = Funcionario::all();
-        $usuarios = Usuario::all();
+        $usuarios = User::all();
 
         return view('ordem_servico.incluir', ['funcionarios' => $funcionarios, 'usuarios' => $usuarios]);
     }
@@ -74,7 +75,7 @@ class OrdemServicoController extends Controller
     public function excluir_ordem($id) {
         $OrdemServicos = OrdemServico::find($id);
         $funcionarios = Funcionario::all();
-        $usuarios = Usuario::all();
+        $usuarios = User::all();
         return view('ordem_servico.excluir', ['OrdemServicos' => $OrdemServicos, 'funcionarios' => $funcionarios, 'usuarios' => $usuarios]);
     }
 
@@ -87,14 +88,14 @@ class OrdemServicoController extends Controller
     public function consultar_ordem($id) {
         $OrdemServicos = OrdemServico::find($id);
         $funcionarios = Funcionario::all();
-        $usuarios = Usuario::all();
+        $usuarios = User::all();
         return view('ordem_servico.consultar', ['OrdemServicos' => $OrdemServicos, 'funcionarios' => $funcionarios, 'usuarios' => $usuarios]);
     }
 
     public function alterar($id) {
         $OrdemServicos = OrdemServico::find($id);
         $funcionarios = Funcionario::all();
-        $usuarios = Usuario::all();
+        $usuarios = User::all();
         return view('ordem_servico.alterar', ['OrdemServicos' => $OrdemServicos, 'funcionarios' => $funcionarios, 'usuarios' => $usuarios]);
     }
 
