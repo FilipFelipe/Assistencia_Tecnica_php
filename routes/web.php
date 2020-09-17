@@ -1,25 +1,21 @@
 <?php
-
-use App\Mail\emailteste;
-
-use Illuminate\Mail\Mailer as MailMailer;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 
 Route::get('/login', 'Auth\LoginController@carregalogin')->name('page.login');
 //Route::get('/', 'Auth\LoginController@carregalogin');
 Route::post('/login', 'Auth\LoginController@login')->name('user.login');
-
-
 Route::get('/cadastro', 'Auth\RegisterController@index')->name('cadastro');
 Route::post('/cadastro', 'Auth\RegisterController@registrar')->name('cadastro_usuario');
-
+Route::get('/verify_account', 'Auth\RegisterController@verify_account')->name('verify_account');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 //Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index');
 
+Route::get('/usuario/mailpage', 'Auth\RegisterController@mailpage')->name('mailpage');
+Route::post('/usuario/recuperar/senha', 'Auth\RegisterController@forgotPassword')->name('forgotPassword');
+Route::post('/reset_password', 'Auth\RegisterController@resetpassword')->name('resetpassword');
 
 
 Route::middleware(['auth']) ->group(function (){
