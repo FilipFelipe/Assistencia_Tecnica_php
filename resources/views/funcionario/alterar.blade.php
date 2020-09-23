@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title')
-Alterar
+@section('titulo')
+    Alterar Funcionário
 @endsection
 @section('content-header')
 <div class="col-6">

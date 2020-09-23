@@ -21,7 +21,7 @@
         </div>
         <div class="form-group col-md-6">
             <label for="input_senha">Senha</label>
-            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" />
+            <input id="password" @if($readonly ?? '' ) readonly  @endif type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" />
 
             @error('password')
             <span class="invalid-feedback" role="alert">
@@ -31,7 +31,7 @@
         </div>
         <div class="form-group col-md-6">
             <label for="input_confirmacao">Senha</label>
-            <input id="password-confirm" type="password" class="form-control" placeholder="Confirmar Senha" name="password_confirmation" required autocomplete="new-password" />
+            <input id="password-confirm"  @if($readonly ?? '' ) readonly @endif type="password" class="form-control" placeholder="Confirmar Senha" name="password_confirmation" required autocomplete="new-password" />
         </div>
 
 
@@ -41,8 +41,8 @@
         </div>
         <div class="form-group col-md-4">
             <label for="l_sexos">Sexo</label>
-            <select name="sexo" class="form-control">
-                <option selected @if($readonly ?? '' ) readonly @endif value="{{ $funcionario->sexo ?? '' }}">{{ $funcionario->sexo ?? '' }}</option>
+            <select name="sexo" class="form-control"  @if($readonly ?? '' ) readonly @endif>
+                <option selected value="{{ $funcionario->sexo ?? '' }}">{{ $funcionario->sexo ?? '' }}</option>
                 <option value="Masculino">Masculino</option>
                 <option value="Feminino">Feminino</option>
                 <option value="Outro">Outro</option>
@@ -74,7 +74,7 @@
         </div>
         <div class="form-group col-md-3">
             <label for="l_complemento">Complemento</label>
-            <select name="complemento" class="form-control">
+            <select name="complemento" class="form-control"  @if($readonly ?? '' ) readonly @endif>
                 <option selected value="Casa">Casa</option>
                 <option value="Apartamento">Apartamento</option>
             </select>

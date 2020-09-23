@@ -11,13 +11,14 @@ Route::get('/verify_account', 'Auth\RegisterController@verify_account')->name('v
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 //Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
+
 Route::get('/home', 'HomeController@index');
 
 Route::get('/usuario/mailpage', 'Auth\RegisterController@mailpage')->name('mailpage');
 Route::post('/usuario/recuperar/senha', 'Auth\RegisterController@forgotPassword')->name('forgotPassword');
 Route::post('/reset_password', 'Auth\RegisterController@resetpassword')->name('resetpassword');
 
-
+Route::post('/excluir/{id}', 'UsuarioController@excluir')->name('excluir');
 Route::middleware(['auth']) ->group(function (){
     Route::prefix('funcionario')->group(function () {
         Route::get('/', 'FuncionarioController@index')->name('listar_funcionario');
@@ -25,8 +26,8 @@ Route::middleware(['auth']) ->group(function (){
         Route::get('/{id}', 'FuncionarioController@visualizar_funcionario')->name('visualizar_');
         Route::get('/alterar/{id}', 'FuncionarioController@alterar_funcionario')->name('alterar_funcionario');
         Route::get('/excluir/{id}', 'FuncionarioController@excluir_funcionario')->name('excluir_funcionario');
-        Route::post('/alterar/{id}', 'FuncionarioController@alterar')->name('alterar');
-        Route::post('/excluir/{id}', 'FuncionarioController@excluir')->name('excluir');
+        Route::post('/alterar/{id}', 'FuncionarioController@alterar')->name('alterar_funcionario_post');
+        Route::post('/excluir/{id}', 'FuncionarioController@excluir')->name('excluir_funcionario_post');
         Route::post('/salvar', 'FuncionarioController@salvar_funcionario')->name('salvar_funcionario');
     });
     Route::prefix('usuario')->group(function () {
@@ -45,8 +46,8 @@ Route::middleware(['auth']) ->group(function (){
         Route::get('/{id}', 'OrdemServicoController@consultar_ordem')->name('consultar_ordem');
         Route::get('/alterar/{id}', 'OrdemServicoController@alterar')->name('alterar_ordem');
         Route::get('/excluir/{id}', 'OrdemServicoController@excluir_ordem')->name('excluir_ordem');
-        Route::post('/excluir/{id}', 'OrdemServicoController@excluir')->name('excluir');
-        Route::post('/alterar/{id}', 'OrdemServicoController@alterar_ordem')->name('alterar');
+        Route::post('/excluir/{id}', 'OrdemServicoController@excluir')->name('excluir_ordem_post');
+        Route::post('/alterar/{id}', 'OrdemServicoController@alterar_ordem')->name('alterar_ordem_post');
         Route::post('/salvar', 'OrdemServicoController@salvar_ordem')->name('salvar_ordem');
     });
     

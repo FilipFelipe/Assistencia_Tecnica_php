@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('titulo')
+    Lista de Usuários
+@endsection
 @section('content')
 <div class="cotainer">
     

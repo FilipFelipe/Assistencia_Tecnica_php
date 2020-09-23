@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title')
-Excluir
+@section('titulo')
+    Excluir Funcionário
 @endsection
 @section('content-header')
 <div class="col-6">

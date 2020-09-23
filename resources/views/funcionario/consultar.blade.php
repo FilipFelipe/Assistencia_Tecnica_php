@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title')
-Consultar
+@section('titulo')
+    Consultar Funcionário
 @endsection
 @section('content-header')
 <div class="col-6">

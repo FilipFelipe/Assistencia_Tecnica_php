@@ -51,7 +51,8 @@ class usuarioController extends Controller
     }
     public function alterar_usuario($id) {
         $usuario = user::find($id);
-        return view('usuario.alterar', ['usuario' => $usuario]);
+       
+        return view('usuario.alterar', ['usuario' => $usuario,'senha' => true]);
     }
     public function alterar(Request $request, $id) {
         $usuario = user::find($id);
@@ -72,10 +73,15 @@ class usuarioController extends Controller
     }
     public function excluir(Request $request, $id) {
         $usuario = user::find($id);
-        
+        //dd(hash::check($usuario->password,$request['password']));
+        //if (hash::check($usuario->password,$request['password'])) {
         $usuario->delete();
-
+        //return redirect('/usuario');
+        //}else{
         return redirect('/usuario');
+        //return redirect()->route('excluir')->with('password', 'Seu e-mail ou senha informados são inválidos');
+        //}
+        
     }
    
     

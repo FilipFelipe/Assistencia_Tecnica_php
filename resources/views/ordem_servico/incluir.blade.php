@@ -1,15 +1,10 @@
 @extends('layouts.app')
+@section('titulo')
+    Lista de Ordem de Serviços
+@endsection
 @section('content')
 		<div class="container">
-			<div class="app-title">
-				<h1>
-					<i class="fa fa-edit">Cadastro de ordem de serviço</i>
-				</h1>
-				<ul class="app-breadcrumb breadcrumb">
-					<li class="breadcrumb-item"><i class="fa fa-search fa-lg"></i></li>
-				<li class="breadcrumb-item"><a href="{{url('/ordem_servico/listar')}}"></a></li>
-				</ul>
-			</div>
+			
 			<div class="tile">
 				<div class="tile-body">
 				<form action="{{url('/ordem_servico/salvar')}}"	method="POST" >

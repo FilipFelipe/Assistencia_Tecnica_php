@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('titulo')
+    Listar Ordem de Serviço
+@endsection
 @section('content')
 <div class="cotainer">
     

@@ -4,11 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('titulo')- Assistencia Técnica</title>
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/adminlte.css') }}" rel="stylesheet">
@@ -17,8 +15,6 @@
     <link href="{{ asset('lib/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('lib/css/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('lib/css/font-awesome/css/font-awesome.css') }}">
-
-    <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 

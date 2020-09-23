@@ -1,11 +1,6 @@
 @extends('layouts.app')
-@section('title')
-Alterar
-@endsection
-@section('content-header')
-<div class="col-6">
-    <h1>Alterar Usuário</h1>
-</div>
+@section('titulo')
+Alterar Usuário
 @endsection
 @section('content')
 <form method="post" action="/usuario/alterar/{{$usuario->id}}">
@@ -13,7 +8,7 @@ Alterar
     @include('usuario.__form')
     <input type="hidden" value="{{ $usuario->id }}">
     <div class="row mt-2">
-        <div class="col-12">
+        <div class="col-10" style="padding-bottom: 20px;">
             <div class="float-right">
                 <button type="submit" class="btn btn-warning mr-1">Alterar</button>
                 <a href="{{ route('listar_usuario') }}" class="btn btn-danger">Cancelar</a>

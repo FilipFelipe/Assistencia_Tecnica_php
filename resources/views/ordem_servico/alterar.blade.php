@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('titulo')
+Alterar Ordem de Serviço
+@endsection
 @section('content')
 	
 		<div class="container">

@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('titulo')
+    Listar Funcionários
+@endsection
 @section('content')
 <div class="cotainer">
 

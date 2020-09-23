@@ -1,7 +1,7 @@
   @extends('layouts.app')
-  @section('title')
-  Incluir
-  @endsection
+  @section('titulo')
+  Cadastrar Funcionário
+@endsection
   @section('content-header')
   <div class="col-6">
       <h1>Novo Funcionário</h1>
