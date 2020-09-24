@@ -6,10 +6,27 @@
     <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="/img/user.png" class="img-circle elevation-2" alt="User Image">
+                @if (isset($user_auth->profile_pic))
+                    <img class="img-circle elevation-2" alt="User Image"
+                        src="{{ url('/storage/img', $user_auth->profile_pic) }}" />
+                @else
+                    @if ($user_auth->sexo == 'Masculino')
+                        <img class="img-circle elevation-2" alt="User Image"
+                            src="{{ url('/storage/img', 'boy.jpg') }}" />
+                    @elseif ($user_auth->sexo == 'Outro')
+                        <img class="img-circle elevation-2" alt="User Image"
+                            src="{{ url('/storage/img', 'neutro.jpg') }}" />
+                    @elseif ($user_auth->sexo == 'Feminino')
+                        <img class="img-circle elevation-2" alt="User Image"
+                            src="{{ url('/storage/img', 'girl.jpg') }}" />
+                    @else
+                        <img class="img-circle elevation-2" alt="User Image"
+                            src="{{ url('/storage/img', 'erro.jpg') }}" />
+                    @endif
+                @endif
             </div>
             <div class="info">
-                <a href="#" class="d-block">{{ $usuario->name ?? '' }}</a>
+                <a href="#" class="d-block">{{ $user_auth->name ?? '' }}</a>
             </div>
         </div>
         <nav class="mt-2">

@@ -89,6 +89,7 @@ class RegisterController extends Controller
             'bairro' => $request['bairro'],
             'cidade' => $request['cidade'],
             'uf' => $request['uf'],
+            'profile_pic' => $request->sexo=='Masculino'? 'boy.png':'girl.png',
             'password' => Hash::make($request['password']),
         ]);
         $usuario->save();
@@ -116,6 +117,7 @@ class RegisterController extends Controller
                 $usuario->remember_token = null;
                 $usuario->is_active = true;
                 $usuario->email_verified_at = Carbon::now();
+                
                 $usuario->save();
                 return redirect()->route('user.login')->with('success', 'E-Mail Validado com Sucesso!');
             }

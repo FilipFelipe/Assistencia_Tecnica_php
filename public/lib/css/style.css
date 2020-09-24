@@ -9,7 +9,10 @@
 #top_formulario{
     padding-top: 75px;
 }
-
+#foto_index{
+    width: 40px;  
+    height: 40px;
+}
 .form-group{
     text-align: left;
 }

@@ -7,6 +7,7 @@ use App\Usuario;
 use App\OrdemServico;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use OrdemPecas;
 
 class OrdemServicoController extends Controller
@@ -19,8 +20,8 @@ class OrdemServicoController extends Controller
 
     public function index() {
         $Ordens = OrdemServico::paginate(5);
-        //dd($Ordens);
-        return view('ordem_servico.index', ['OrdemServicos' => $Ordens]);
+        $user_auth= Auth::user();
+        return view('ordem_servico.index', ['OrdemServicos' => $Ordens],['user_auth' => $user_auth]);
     }
 
     public function ordem_funcionario($id) {
@@ -38,8 +39,8 @@ class OrdemServicoController extends Controller
     public function nova_ordem() {
         $funcionarios = Funcionario::all();
         $usuarios = User::all();
-
-        return view('ordem_servico.incluir', ['funcionarios' => $funcionarios, 'usuarios' => $usuarios]);
+        $user_auth= Auth::user();
+        return view('ordem_servico.incluir', ['funcionarios' => $funcionarios, 'usuarios' => $usuarios],['user_auth' => $user_auth]);
     }
 
     public function salvar_ordem(Request $request) {
@@ -76,7 +77,8 @@ class OrdemServicoController extends Controller
         $OrdemServicos = OrdemServico::find($id);
         $funcionarios = Funcionario::all();
         $usuarios = User::all();
-        return view('ordem_servico.excluir', ['OrdemServicos' => $OrdemServicos, 'funcionarios' => $funcionarios, 'usuarios' => $usuarios]);
+        $user_auth= Auth::user();
+        return view('ordem_servico.excluir', ['OrdemServicos' => $OrdemServicos, 'funcionarios' => $funcionarios, 'usuarios' => $usuarios],['user_auth' => $user_auth]);
     }
 
     public function excluir($id) {
@@ -89,14 +91,16 @@ class OrdemServicoController extends Controller
         $OrdemServicos = OrdemServico::find($id);
         $funcionarios = Funcionario::all();
         $usuarios = User::all();
-        return view('ordem_servico.consultar', ['OrdemServicos' => $OrdemServicos, 'funcionarios' => $funcionarios, 'usuarios' => $usuarios]);
+        $user_auth= Auth::user();
+        return view('ordem_servico.consultar', ['OrdemServicos' => $OrdemServicos, 'funcionarios' => $funcionarios, 'usuarios' => $usuarios],['user_auth' => $user_auth]);
     }
 
     public function alterar($id) {
         $OrdemServicos = OrdemServico::find($id);
         $funcionarios = Funcionario::all();
         $usuarios = User::all();
-        return view('ordem_servico.alterar', ['OrdemServicos' => $OrdemServicos, 'funcionarios' => $funcionarios, 'usuarios' => $usuarios]);
+        $user_auth= Auth::user();
+        return view('ordem_servico.alterar', ['OrdemServicos' => $OrdemServicos, 'funcionarios' => $funcionarios, 'usuarios' => $usuarios],['user_auth' => $user_auth]);
     }
 
  

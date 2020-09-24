@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 class usuarioController extends Controller
 {
     public function novo_usuario() {
@@ -13,7 +14,8 @@ class usuarioController extends Controller
     public function index()
     {
         $usuarios = user::paginate(5);
-        return view('usuario.index', ['usuario' => $usuarios]);
+        $user_auth= Auth::user();
+        return view('usuario.index', ['usuario' => $usuarios],['user_auth' => $user_auth]);
     }
     public function salvar_usuario(Request $request) {
         $this->validate($request, [
@@ -39,20 +41,23 @@ class usuarioController extends Controller
             'password' => Hash::make($request['password']),
         ]);
         $usuario->save();
-        return redirect('/usuario');
+        return redirect()->route('listar_usuario')->with('success', 'Usuário criado com sucesso! :)');
     }
     public function visualizar_usuario($id) {
+        $user_auth= Auth::user();
         $usuario = user::find($id);
-        return view('usuario.consultar', ['usuario' => $usuario, 'readonly' => true]);
+        return view('usuario.consultar', ['usuario' => $usuario, 'readonly' => true],['user_auth' => $user_auth]);
     }
     public function excluir_usuario($id) {
+        $user_auth= Auth::user();
         $usuario = user::find($id);
-        return view('usuario.excluir', ['usuario' => $usuario, 'readonly' => true]);
+        return view('usuario.excluir', ['usuario' => $usuario, 'readonly' => true],['user_auth' => $user_auth]);
     }
     public function alterar_usuario($id) {
+        $user_auth= Auth::user();
         $usuario = user::find($id);
        
-        return view('usuario.alterar', ['usuario' => $usuario,'senha' => true]);
+        return view('usuario.alterar', ['usuario' => $usuario,'senha' => true],['user_auth' => $user_auth]);
     }
     public function alterar(Request $request, $id) {
         $usuario = user::find($id);
@@ -69,19 +74,12 @@ class usuarioController extends Controller
         $usuario->uf = $request['uf'];
         $usuario->cep = $request['cep'];
         $usuario->save();
-        return redirect('/usuario');
+        return redirect()->route('listar_usuario')->with('success', 'Usuário alterado com sucesso! :)');
     }
     public function excluir(Request $request, $id) {
         $usuario = user::find($id);
-        //dd(hash::check($usuario->password,$request['password']));
-        //if (hash::check($usuario->password,$request['password'])) {
         $usuario->delete();
-        //return redirect('/usuario');
-        //}else{
-        return redirect('/usuario');
-        //return redirect()->route('excluir')->with('password', 'Seu e-mail ou senha informados são inválidos');
-        //}
-        
+        return redirect()->route('listar_usuario')->with('success', 'Usuário excluído com sucesso! :)');
     }
    
     

@@ -27,7 +27,7 @@
         <div class="content-wrapper">
             @yield('content')
         </div>
-
+        
         @include('layouts.footer')
     </div>
     <script type="text/javascript">
@@ -70,6 +70,7 @@
                 limpa_formulário_cep()
             }
         };
+
     </script>
     <script src="{{ asset('js/jquery/jquery-3.4.1.js') }}"></script>
     <script src="{{ asset('js/jquery/jquery.mask.min.js') }}"></script>
@@ -77,8 +78,15 @@
     <script src="{{ asset('js/bootstrap/bootstrap.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/adminlte.js') }}"></script>
+    @yield('javascript')
+    <script>
+        $().ready(function() {
+            setTimeout(function () {
+                $('#alert-board').hide(); 
+            }, 2000); 
+        });
+    </script>
 
- 
 </body>
 
 </html>
