@@ -104,6 +104,7 @@
                     @endisset
                     <a class="btn btn-success btn-sm" href="{{ 'usuario/novo' }}">Incluir
                         <i class="fa fa-plus-circle"></i>
+            
                     </a>
 
             </div>
@@ -124,4 +125,18 @@
         </div>
     </div>
 @endif
+@if (Session::has('fail'))
+    <div class="alert" id="alert-board" role="alert" aria-live="assertive" aria-atomic="true" data-delay="1500"
+        style="position: absolute; top: 3.5rem; right: 0rem;border-right-width: 0px;padding-right: 0px;padding-top: 15px;">
+        <div class="alert alert-danger alert-dismissible fade show" id="alert-board" role="alert" style="padding-right: 30px;">
+            <i class="fa fa-check-circle"></i>
+            <span>
+                <strong>{{ Session::get('fail') }}</strong>
+            </span>
+        </div>
+    </div>
+@endif
+
+@include('layouts.graficos')
+
 @endsection

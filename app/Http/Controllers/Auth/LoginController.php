@@ -30,6 +30,9 @@ class LoginController extends Controller
                 if ($user->is_active == true) {
                     Auth::login($user);
                     $user_auth = Auth::user();
+                    $usuario = user::find($user_auth->id);
+                    $usuario->ip = $request->ip();;
+                    $usuario->save();
                     return view('dashboard', ['user_auth' => $user_auth]);
                 } else {
                     return redirect()->route('page.login')->with('fail', 'Verifique o email para ativar a sua conta!');

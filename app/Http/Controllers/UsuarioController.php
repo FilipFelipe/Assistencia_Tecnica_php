@@ -12,10 +12,11 @@ class usuarioController extends Controller
         return view('usuario.incluir');
     }
     public function index()
-    {
+    { 
+        $valores=[1,2,20];
         $usuarios = user::paginate(5);
         $user_auth= Auth::user();
-        return view('usuario.index', ['usuario' => $usuarios],['user_auth' => $user_auth]);
+        return view('usuario.index', ['usuario' => $usuarios],['user_auth' => $user_auth],compact('valores'));
     }
     public function salvar_usuario(Request $request) {
         $this->validate($request, [
@@ -40,6 +41,21 @@ class usuarioController extends Controller
             'uf' => $request['uf'],
             'password' => Hash::make($request['password']),
         ]);
+        if($request->hasFile('profile_pic') && $request->file('profile_pic')->isValid()){
+
+            $name = $request->file('profile_pic')->getClientOriginalName();
+            $horario = time();
+    
+            $filename = "{$horario}_{$name}";
+            $databasename = "/storage/img/{$filename}";
+    
+            $upload = $request->file('profile_pic')->storeAs('img', $filename);
+            if(!$upload) {
+                return redirect()->back()->with('error', 'falha ao fazer upload')->withInput();
+            }
+            $usuario->profile_pic = $databasename;
+        }
+
         $usuario->save();
         return redirect()->route('listar_usuario')->with('success', 'Usuário criado com sucesso! :)');
     }
@@ -73,13 +89,32 @@ class usuarioController extends Controller
         $usuario->cidade = $request['cidade'];
         $usuario->uf = $request['uf'];
         $usuario->cep = $request['cep'];
+        
+        if($request->hasFile('profile_pic') && $request->file('profile_pic')->isValid()){
+            $name = $request->id;
+            $horario = time();
+            $filename = "{$horario}_{$name}";
+            $databasename = "{$filename}";
+            $upload = $request->file('profile_pic')->storeAs('img', $filename);
+            if(!$upload) {
+                return redirect()->back()->with('error', 'falha ao fazer upload')->withInput();
+            }
+            $usuario->profile_pic = $databasename;
+        }
+
         $usuario->save();
         return redirect()->route('listar_usuario')->with('success', 'Usuário alterado com sucesso! :)');
     }
     public function excluir(Request $request, $id) {
-        $usuario = user::find($id);
-        $usuario->delete();
-        return redirect()->route('listar_usuario')->with('success', 'Usuário excluído com sucesso! :)');
+        if ( Auth::user()->id == $id ){
+            return redirect()->route('listar_usuario')->with('fail','Você não pode ser excluído! '); 
+        }
+        else{
+            $usuario = user::find($id);
+            $usuario->delete();
+            return redirect()->route('listar_usuario')->with('success', 'Usuário excluído com sucesso! :)');
+        }
+        
     }
    
     

@@ -3,7 +3,7 @@
 Alterar Usuário
 @endsection
 @section('content')
-<form method="post" action="/usuario/alterar/{{$usuario->id}}">
+<form method="post" action="/usuario/alterar/{{$usuario->id}}" enctype="multipart/form-data">
     @csrf
     @include('usuario.__form')
     <input type="hidden" value="{{ $usuario->id }}">

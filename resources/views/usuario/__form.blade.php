@@ -6,45 +6,45 @@
                     <div class="mt-2">
                         <div class="position d-inline-block col-12 col-md-12 mr-3 mr-md-0 flex-shrink-0"
                             style="z-index:4;">
-                         
+                            
                                 @if(isset($usuario->profile_pic))
-                                    <img style="height:auto;" width="260"
+                                    <img id="imagem_perfil" class="mx-auto d-block" style="height:auto;" width="260"
                                     height="260" class="avatar avatar-user width-full border bg-white"
-                                    src="{{ url('/storage/img', $usuario->profile_pic) }}" />
+                                    src="{{ url('/storage/img', $user_auth->profile_pic) }}" />
                                     
                                 @else
                                     @if(isset($usuario->sexo))
                                         @if ($usuario->sexo == 'Masculino')
-                                            <img style="height:auto;"  width="260"
+                                            <img id="imagem_perfil" style="height:auto;"  width="260"
                                             height="260" class="avatar avatar-user width-full border bg-white"
                                             src="{{ url('/storage/img', 'boy.jpg') }}" />
                                         @elseif ($usuario->sexo == 'Outro')
-                                            <img style="height:auto;"  width="260"
+                                            <img  id="imagem_perfil" style="height:auto;"  width="260"
                                             height="260" class="avatar avatar-user width-full border bg-white"
                                             src="{{ url('/storage/img', 'neutro.jpg') }}" />
                                         @elseif ($usuario->sexo == 'Feminino')
-                                            <img style="height:auto;"  width="260"
+                                            <img id="imagem_perfil" style="height:auto;"  width="260"
                                             height="260" class="avatar avatar-user width-full border bg-white"
                                             src="{{ url('/storage/img', 'girl.jpg') }}" />
                                         @else
-                                            <img style="height:auto;"  width="260"
+                                            <img id="imagem_perfil" style="height:auto;"  width="260"
                                             height="260" class="avatar avatar-user width-full border bg-white"
                                             src="{{ url('/storage/img', 'erro.jpg') }}" />
                                         @endif
                                     @else
-                                        <img style="height:auto;"  width="260"
+                                        <img id="imagem_perfil" style="height:auto;"  width="260"
                                         height="260" class="avatar avatar-user width-full border bg-white"
-                                        src="{{ url('/storage/img', 'incluir.jpg') }}" />
+                                        src="{{ url( $usuario->profile_pic) }}" />
                                     @endif
                            
                                 @endif
 
                                 <div class="mt-1 flex-items-center" style="padding-left: 50px;">
-                                    <label class="btn btn-primary" id="input_foto" for="foto_perfil"><i
-                                            class="fa fa-cloud-upload" aria-hidden="true"></i></label>
-                                    <input id="foto_banco" class="input_foto_banco" hidden='true' type="file">
-                                    <label class="btn btn-danger"><i class="fa fa-ban" aria-hidden="true"></i></label>
+                                    <label class="btn btn-primary" id="input_foto" for="profile_pic"><i class="fa fa-cloud-upload" aria-hidden="true"></i></label>
+                                    <input name="profile_pic" onchange="uploadFoto(event)" id="profile_pic" hidden='true' type="file"  accept=".jpg, .jpeg, .png"  class="input_foto_perfil">
+                                    <label  onclick="restaurarfoto()" class="btn btn-danger"><i class="fa fa-ban" aria-hidden="true"></i></label>
                                 </div>
+                               
                         </div>
                     </div>
                 </div>
@@ -211,5 +211,17 @@
 </div>
 
 @section('javascript')
+
+    <script>
+        let foto_inicial = document.getElementById('imagem_perfil').src;
+        restaurarfoto = function() {
+            document.getElementById('profile_pic').value = "";
+            document.getElementById('imagem_perfil').src = foto_inicial;
+        }
+        var uploadFoto = function(event) {
+            var foto = document.getElementById('imagem_perfil');
+            foto.src = URL.createObjectURL(event.target.files[0]);
+        };
+    </script>
 
 @endsection
